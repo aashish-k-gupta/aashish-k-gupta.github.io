@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crank Slider Animation</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <style>
+        body { margin: 0; }
+        canvas { display: block; }
+    </style>
+</head>
+<body>
+    <script>
+        let theta = 0;
+        let crankRadius = 100;
+        let connectingRodLength = 300;
+        let rotationSpeed = 0.05;
+
+        function setup() {
+            createCanvas(windowWidth, windowHeight);
+        }
+
+        function draw() {
+            background(200);
+
+            let xCrank = crankRadius * cos(theta);
+            let yCrank = crankRadius * sin(theta);
+
+            let pistonY = yCrank + sqrt(connectingRodLength**2 - xCrank**2);
+
+            translate(width / 2, height / 2);
+
+            // Draw crank
+            stroke(0);
+            line(0, 0, xCrank, yCrank);
+
+            // Draw rod
+            line(xCrank, yCrank, 0, pistonY);
+
+            // Draw piston
+            rectMode(CENTER);
+            rect(0, pistonY, 50, 20);
+
+            theta += rotationSpeed;
+        }
+    </script>
+</body>
+</html>
